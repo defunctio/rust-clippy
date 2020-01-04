@@ -1,0 +1,22 @@
+error: this argument (4096 byte) is passed by value, but would be more efficient if passed by ref (limit: 16 byte)
+  --> $DIR/large_data_pass_by_val.rs:14:24
+   |
+LL |     fn bad(&self, arg: A);
+   |                        ^ help: consider passing by ref instead: `A`
+   |
+   = note: `-D clippy::large-data-pass-by-val` implied by `-D warnings`
+
+error: this argument (4096 byte) is passed by value, but would be more efficient if passed by ref (limit: 16 byte)
+  --> $DIR/large_data_pass_by_val.rs:27:27
+   |
+LL |     fn do_bad(&self, arg: A) {
+   |                           ^ help: consider passing by ref instead: `A`
+
+error: this argument (4096 byte) is passed by value, but would be more efficient if passed by ref (limit: 16 byte)
+  --> $DIR/large_data_pass_by_val.rs:35:21
+   |
+LL | fn pass_by_val(arg: A) {
+   |                     ^ help: consider passing by ref instead: `A`
+
+error: aborting due to 3 previous errors
+

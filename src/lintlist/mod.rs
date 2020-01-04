@@ -6,7 +6,7 @@ pub use lint::Lint;
 pub use lint::LINT_LEVELS;
 
 // begin lint list, do not remove this comment, it’s used in `update_lints`
-pub const ALL_LINTS: [Lint; 344] = [
+pub const ALL_LINTS: [Lint; 345] = [
     Lint {
         name: "absurd_extreme_comparisons",
         group: "correctness",
@@ -902,6 +902,13 @@ pub const ALL_LINTS: [Lint; 344] = [
         desc: "unclear name",
         deprecation: None,
         module: "non_expressive_names",
+    },
+    Lint {
+        name: "large_data_pass_by_val",
+        group: "perf",
+        desc: "functions taking large copyable arguments by value",
+        deprecation: None,
+        module: "large_data_pass_by_val",
     },
     Lint {
         name: "large_digit_groups",

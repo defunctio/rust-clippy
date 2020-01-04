@@ -219,6 +219,7 @@ pub mod inline_fn_without_body;
 pub mod int_plus_one;
 pub mod integer_division;
 pub mod items_after_statements;
+pub mod large_data_pass_by_val;
 pub mod large_enum_variant;
 pub mod large_stack_arrays;
 pub mod len_zero;
@@ -556,6 +557,7 @@ pub fn register_plugins(store: &mut lint::LintStore, sess: &Session, conf: &Conf
         &int_plus_one::INT_PLUS_ONE,
         &integer_division::INTEGER_DIVISION,
         &items_after_statements::ITEMS_AFTER_STATEMENTS,
+        &large_data_pass_by_val::LARGE_DATA_PASS_BY_VAL,
         &large_enum_variant::LARGE_ENUM_VARIANT,
         &large_stack_arrays::LARGE_STACK_ARRAYS,
         &len_zero::LEN_WITHOUT_IS_EMPTY,
@@ -912,6 +914,11 @@ pub fn register_plugins(store: &mut lint::LintStore, sess: &Session, conf: &Conf
         &sess.target,
     );
     store.register_late_pass(move || box trivially_copy_pass_by_ref);
+    let large_data_pass_by_val = large_data_pass_by_val::LargeDataPassByVal::new(
+        conf.large_data_size_min_limit,
+        &sess.target,
+    );
+    store.register_late_pass(move || box large_data_pass_by_val);
     store.register_late_pass(|| box try_err::TryErr);
     store.register_late_pass(|| box use_self::UseSelf);
     store.register_late_pass(|| box bytecount::ByteCount);
@@ -1150,6 +1157,7 @@ pub fn register_plugins(store: &mut lint::LintStore, sess: &Session, conf: &Conf
         LintId::of(&inherent_to_string::INHERENT_TO_STRING_SHADOW_DISPLAY),
         LintId::of(&inline_fn_without_body::INLINE_FN_WITHOUT_BODY),
         LintId::of(&int_plus_one::INT_PLUS_ONE),
+        LintId::of(&large_data_pass_by_val::LARGE_DATA_PASS_BY_VAL),
         LintId::of(&large_enum_variant::LARGE_ENUM_VARIANT),
         LintId::of(&len_zero::LEN_WITHOUT_IS_EMPTY),
         LintId::of(&len_zero::LEN_ZERO),
@@ -1576,6 +1584,7 @@ pub fn register_plugins(store: &mut lint::LintStore, sess: &Session, conf: &Conf
         LintId::of(&bytecount::NAIVE_BYTECOUNT),
         LintId::of(&entry::MAP_ENTRY),
         LintId::of(&escape::BOXED_LOCAL),
+        LintId::of(&large_data_pass_by_val::LARGE_DATA_PASS_BY_VAL),
         LintId::of(&large_enum_variant::LARGE_ENUM_VARIANT),
         LintId::of(&loops::MANUAL_MEMCPY),
         LintId::of(&loops::NEEDLESS_COLLECT),
