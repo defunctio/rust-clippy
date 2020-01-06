@@ -1,0 +1,59 @@
+error: `Ordering::Acquire` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:25:9
+   |
+LL |         Ordering::Acquire
+   |         ^^^^^^^^^^^^^^^^^
+   |
+   = note: `-D clippy::atomic-ordering` implied by `-D warnings`
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::Acquire` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:25:9
+   |
+LL |         Ordering::Acquire
+   |         ^^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::AcqRel` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:30:9
+   |
+LL |         Ordering::AcqRel
+   |         ^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::Acquire` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:35:9
+   |
+LL |         Ordering::Acquire
+   |         ^^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::AcqRel` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:40:9
+   |
+LL |         Ordering::AcqRel
+   |         ^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::Acquire` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:44:36
+   |
+LL |     order_test!(AtomicBool, store, Ordering::Acquire, true);
+   |                                    ^^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: `Ordering::AcqRel` is not a valid `atomic::Ordering` for `store`
+  --> $DIR/atomic_ordering.rs:45:36
+   |
+LL |     order_test!(AtomicBool, store, Ordering::AcqRel, true);
+   |                                    ^^^^^^^^^^^^^^^^
+   |
+   = help: valid orderings are ["SeqCst", "Release", "Relaxed"]
+
+error: aborting due to 7 previous errors
+

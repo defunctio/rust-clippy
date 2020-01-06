@@ -6,7 +6,7 @@ pub use lint::Lint;
 pub use lint::LINT_LEVELS;
 
 // begin lint list, do not remove this comment, it’s used in `update_lints`
-pub const ALL_LINTS: [Lint; 344] = [
+pub const ALL_LINTS: [Lint; 345] = [
     Lint {
         name: "absurd_extreme_comparisons",
         group: "correctness",
@@ -48,6 +48,13 @@ pub const ALL_LINTS: [Lint; 344] = [
         desc: "assigning the result of an operation on a variable to that same variable",
         deprecation: None,
         module: "assign_ops",
+    },
+    Lint {
+        name: "atomic_ordering",
+        group: "correctness",
+        desc: "Use of an incorrect atomic ordering will cause panic",
+        deprecation: None,
+        module: "atomic_ordering",
     },
     Lint {
         name: "bad_bit_mask",
